@@ -1,3 +1,5 @@
+const moment = require('moment');
+
 const Viewing = require('../model/viewing.js');
 const NotFound = require('../error/viewing-not-found-error.js');
 
@@ -22,6 +24,9 @@ module.exports = {
     create: async (req, res, next) => {
         const viewing = new Viewing(req.body);
 
+        if (viewing.timeAndDate) {
+            viewing.timeAndDate = moment.utc(viewing.timeAndDate);
+        }
         try {
             await viewing.save();
             res.status(200).json(viewing);
