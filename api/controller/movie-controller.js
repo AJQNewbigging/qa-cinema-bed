@@ -22,7 +22,7 @@ module.exports = {
         const movie = new Movie(req.body);
         try {
             await movie.save();
-            res.status(200).json(user);
+            res.status(200).json(movie);
         } catch (error) {
             next (error);
         }
