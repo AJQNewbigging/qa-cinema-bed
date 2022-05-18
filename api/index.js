@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 3000;
 const DB_URI = process.env.DB_URI || "mongodb://127.0.0.1:27017/qa-cinema"
 
 // Require routers
-const exampleRouter = require('./route/example-router.js')
+const viewingRouter = require('./route/viewing-router.js')
 
 // Create server instance
 const app = express();
@@ -27,7 +27,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // TODO: Add routers
-app.use("/", exampleRouter);
+app.use("/viewing", viewingRouter);
 
 app.use((error, request, response, next) => {
     // TODO: add error handling middleware

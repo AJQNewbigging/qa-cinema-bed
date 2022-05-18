@@ -5,7 +5,7 @@ module.exports = {
     getAll: async (req, res, next) => {
         const viewings = await Viewing.find({}).populate(['movie', 'bookings']);
 
-        res.stats(200).json(viewings);
+        res.status(200).json(viewings);
     },
 
     getById: async (req, res, next) => {
