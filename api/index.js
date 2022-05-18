@@ -1,11 +1,15 @@
 const express = require('express');
-const PORT = process.env.PORT || 3000;
+const mongoose = require('mongoose');
 // Need to have Morgan watching over us
 const morgan = require('morgan');
+
+const PORT = process.env.PORT || 3000;
+const DB_URI = process.env.DB_URI || "mongodb://127.0.0.1:27017/qa-cinema"
 
 // Require routers
 const exampleRouter = require('./route/example-router.js')
 
+// Create server instance
 const app = express();
 
 // Apply environment configurations and/or middleware
@@ -30,7 +34,13 @@ app.use((error, request, response, next) => {
 });
 
 async function main() {
-    // TODO: add mongoDB connection 
+    await mongoose.connect(DB_URI, { useNewUrlParser: true }).then(() => {
+        console.log(`DB Connection establised through: ${DB_URI}`);
+    });
+
+    const db = mongoose.connection;
+    db.on('error', console.error.bind(console, 'Error connecting to DB'));
+    db.on('connection', console.log.bind(console, 'DB connection established'));
 
     // Start the server
     const server = app.listen(PORT, function() {
