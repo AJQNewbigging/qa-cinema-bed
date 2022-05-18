@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 // Need to have Morgan watching over us
 const morgan = require('morgan');
+const HttpError = require('./error/http-error.js');
+const NotFoundError = require('./error/not-found-error.js');
 
 const PORT = process.env.PORT || 3000;
 const DB_URI = process.env.DB_URI || "mongodb://127.0.0.1:27017/qa-cinema"
@@ -30,7 +32,24 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/viewing", viewingRouter);
 
 app.use((error, request, response, next) => {
-    // TODO: add error handling middleware
+    console.error(error.message);
+
+    if (!(error instanceof HttpError)) {
+        if (error instanceof NotFoundError) {
+            error = new HttpError(error, 404);
+        } else if (error.name === "ValidationError") {
+            error = new HttpError(error, 400);
+        } else {
+            // Unknown error
+            error = new HttpError(new Error("Something went wrong..."), 500);
+        }
+    }
+    // It must be a HTTP error to have reached here, whether that was passed to error, or created
+    // above
+    return response.status(error.statusCode).json({
+        message: error.message,
+        data: error.data 
+    })
 });
 
 async function main() {

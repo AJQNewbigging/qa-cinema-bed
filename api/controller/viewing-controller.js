@@ -1,4 +1,5 @@
 const Viewing = require('../model/viewing.js');
+const NotFound = require('../error/viewing-not-found-error.js');
 
 module.exports = {
 
@@ -15,7 +16,7 @@ module.exports = {
             res.status(200).json(viewing);
             return;
         }
-        next(new Error(id));
+        next(new NotFound(id));
     },
 
     create: async (req, res, next) => {
@@ -39,7 +40,7 @@ module.exports = {
             res.status(200).json(viewing);
             return;
         }
-        next(new Error(id));
+        next(new NotFound(id));
     },
 
     delete: async (req, res, next) => {
@@ -49,7 +50,7 @@ module.exports = {
         if (viewing) {
             return res.status(200).json(viewing);
         }
-        next(new Error(id));
+        next(new NotFound(id));
     }
 
 }
