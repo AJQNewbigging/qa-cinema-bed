@@ -28,7 +28,7 @@ const movieSchema = new Schema({
         required: true
     },
     runtime: {
-        type: String,
+        type: Number,
         unique: false,
         required: true
     },
@@ -39,5 +39,5 @@ const movieSchema = new Schema({
     }
 });
 
-const Film = mongoose.model('Movie', movieSchema);
+const Movie = mongoose.model('Movie', movieSchema);
 module.exports = Movie;
