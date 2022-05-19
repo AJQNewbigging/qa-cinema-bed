@@ -1,4 +1,6 @@
 const express = require('express');
+const multer = require('multer');
+const upload = multer({dest: 'uploads/'});
 
 const movieController = require('../controller/movie-controller.js');
 const router = express.Router();
@@ -8,5 +10,6 @@ router.get('/:id', movieController.getMovieById);
 router.post('/', movieController.createMovie);
 router.put('/:id', movieController.updateMovie);
 router.delete('/:id', movieController.deleteMovie);
+router.post('/:id/add-poster', upload.single('img'), movieController.addPoster);
 
 module.exports = router;

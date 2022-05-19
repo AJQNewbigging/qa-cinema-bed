@@ -19,7 +19,6 @@ const movieSchema = new Schema({
     },
     director: {
         type: String,
-        unique: true,
         required: true
     },
     yearOfRelease: {
@@ -34,8 +33,13 @@ const movieSchema = new Schema({
     },
     certification: {
         type: String,
-        unqiue: false,
+        unique: false,
         required: true
+    },
+    poster: {
+        type: Schema.Types.ObjectId,
+        ref: 'Image',
+        required: false
     }
 });
 
