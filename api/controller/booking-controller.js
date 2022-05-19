@@ -43,13 +43,12 @@ module.exports = {
 
 
     deleteBooking: async (req, res, next) => {
-        const booking = bookings.find((booking) => booking.id === Number(req.params.id))
+        const filter = { _id: req.params.id };
 
-        if(!booking) {
-            return res.status(404).json({success: false, msg: `The booking with the id you requested could not be found`})
+        const booking = await Booking.findOneAndDelete(filter);
+        if (booking) {
+            return res.status(200).json(booking);
         }
-
-        const newBookings = bookings.filter((booking) => booking.id !== Number(req.params.id))
-        return res.status(200).json({success: true, data: newBookings})
+        next(new BookingNotFoundError(id));
     }
 }
