@@ -78,5 +78,16 @@ module.exports = {
         }
 
         next(new MovieNotFoundError(id));
+    },
+
+    findWhatsOn: async (req, res, next) => {
+        const movies = await Movie.find({ releaseDate: { $lte: new Date() } }).sort({ releaseDate: 1 })
+        res.status(200).json(movies);
+    },
+
+    findNewReleases: async (req, res, next) => {
+        const movies = await Movie.find({ releaseDate: { $gt: new Date() } }).sort({ releaseDate: 1 })
+        res.status(200).json(movies);
     }
+
 }
