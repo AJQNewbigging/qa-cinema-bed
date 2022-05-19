@@ -19,6 +19,7 @@ const movieSchema = new Schema({
     },
     director: {
         type: String,
+        unqiue: false,
         required: true
     },
     yearOfRelease: {
