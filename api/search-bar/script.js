@@ -5,7 +5,7 @@ const searchInput = document.querySelector("[data-search]")
 let movies = []
 
 searchInput.addEventListener("input", e => {
-    const value = e.target.value.lowerCase()
+    const value = e.target.value.toLowerCase()
     movies.forEach(movie => {
         const isVisible = movie.name.toLowerCase().includes(value) || movie.genre.toLowerCase().includes(value)
         movie.element.classList.toggle("hide", !isVisible)
@@ -15,7 +15,7 @@ searchInput.addEventListener("input", e => {
 fetch("http://127.0.0.1:3000/movie")
     .then(res => res.json())
     .then(data => {
-    movie = data.map(movie => {
+    movies = data.map(movie => {
         const card = movieCardTemplate.content.cloneNode(true).children[0]
         const header = card.querySelector("[data-header]")
         const body = card.querySelector("[data-body]")
