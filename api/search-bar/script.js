@@ -17,10 +17,10 @@ searchInput.addEventListener("input", e => {
 //     .then(data => {})
 //     movie = data.map(movie) => {
 //         const card = movieCardTemplate.content.cloneNode(true).children[0]
-//         const header = card.querySelector("[data-header")
-//         const body = card.querySelector("[data-body")
+//         const header = card.querySelector("[data-header]")
+//         const body = card.querySelector("[data-body]")
 //         header.textContent = movie.name
 //         body.textContent = movie.genre
 //         movieCardContainer.append(card)
-//         return { name: movie.name, genre: movie.genre, element: card}
+//         return {name: movie.name, genre: movie.genre, element: card}
 //     })
