@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 // Need to have Morgan watching over us
 const morgan = require('morgan');
 const HttpError = require('./error/http-error.js');
@@ -16,7 +17,6 @@ const emailRouter = require('./route/email-router.js');
 
 // Create server instance
 const app = express();
-
 // Apply environment configurations and/or middleware
 if (process.env.NODE_ENV === "prod") {
     console.log("=== PRODUCTION ===");
@@ -30,7 +30,8 @@ if (process.env.NODE_ENV === "prod") {
 app.use(express.json());
 // URL form decoder
 app.use(express.urlencoded({ extended: true }));
-
+// Allow cross-origin requests
+app.use(cors());
 // Add routers
 app.use("/viewing", viewingRouter);
 app.use("/movie", movieRouter);

@@ -1,0 +1,26 @@
+.search-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.input {
+    font-size: 1rem;
+}
+
+.movie-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+}
+
+.card {
+    border: 1px solid black;
+    padding: 1rem;
+}
+
+.card > header {
+    margin: 1rem;
+}
+
+.hide {
+    display: none;
+}
