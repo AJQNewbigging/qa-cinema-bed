@@ -1,6 +1,8 @@
 .search-wrapper {
     display: flex;
     flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 50px;
 }
 
 .input {
@@ -9,16 +11,27 @@
 
 .movie-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    align-items: flex-start;
 }
 
 .card {
-    border: 1px solid black;
+    background: white;
     padding: 1rem;
+    border: none;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 1rem;
+
 }
 
 .card > header {
     margin: 1rem;
+}
+
+.card > body {
+    font-size: 1rem;
+    color: darkgrey;
 }
 
 .hide {
