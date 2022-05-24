@@ -18,17 +18,6 @@ module.exports = {
         next(new BookingNotFoundError(id));
     },
 
-    createBooking: async (req, res, next) => {
-        const booking = new Booking(req.body);
-        try {
-            await booking.save();
-            res.status(200).json(booking);
-        } catch (error) {
-            next(error);
-        }
-    },
-
-
     updateBooking: async (req, res, next) => {
         const id = req.params.id;
         const updates = req.body;

@@ -1,36 +1,23 @@
 const Viewing = require('../model/viewing.js');
 const NotFound = require('../error/viewing-not-found-error.js');
+const Booking = require('../model/booking.js');
 
 module.exports = {
 
     getAll: async (req, res, next) => {
-        const viewings = await Viewing.find({}).populate(['movie', 'bookings']);
+        const viewings = await Viewing.find({}).populate(['bookings']);
 
         res.status(200).json(viewings);
     },
 
     getById: async (req, res, next) => {
         const id = req.params.id;
-        const viewing = await Viewing.findById(id).populate(['movie', 'bookings']);
+        const viewing = await Viewing.findById(id).populate(['bookings']);
         if (viewing) {
             res.status(200).json(viewing);
             return;
         }
         next(new NotFound(id));
-    },
-
-    create: async (req, res, next) => {
-        const viewing = new Viewing(req.body);
-
-        // if (viewing.timeAndDate) {
-        //     viewing.timeAndDate = moment.utc(viewing.timeAndDate);
-        // }
-        try {
-            await viewing.save();
-            res.status(200).json(viewing);
-        } catch (error) {
-            next(error);
-        }
     },
 
     update: async (req, res, next) => {
@@ -54,6 +41,21 @@ module.exports = {
             return res.status(200).json(viewing);
         }
         next(new NotFound(id));
-    }
+    },
 
+    addBooking: async (req, res, next) => {
+        const id = req.params.id;
+        const booking = new Booking(req.body);
+        const viewing = await Viewing.findById(id);
+
+        if (viewing) {
+            await booking.save();
+            viewing.bookings.push(booking);
+            await viewing.save();
+
+            res.status(200).json(viewing);
+            return;
+        }
+        next(new NotFound(id));
+    }
 }
