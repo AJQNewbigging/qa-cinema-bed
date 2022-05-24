@@ -72,7 +72,18 @@ npm run prod
 
 ### Viewings
 
+**POST /viewing/\<viewing_id\>/add-booking** => Creates a new booking for a viewing, body should look like such:
 
+```json
+{
+    "adult": 1,
+    "child": 2,
+    "concession": 2,
+    "forename": "Ash",
+    "surname": "Pallet",
+    "email": "ash3@pallet.co.uk"
+}
+```
 
 
 
