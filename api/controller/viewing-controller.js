@@ -1,5 +1,6 @@
 const Viewing = require('../model/viewing.js');
 const NotFound = require('../error/viewing-not-found-error.js');
+const Booking = require('../model/booking.js');
 
 module.exports = {
 
@@ -40,6 +41,21 @@ module.exports = {
             return res.status(200).json(viewing);
         }
         next(new NotFound(id));
-    }
+    },
 
+    addBooking: async (req, res, next) => {
+        const id = req.params.id;
+        const booking = new Booking(req.body);
+        const viewing = await Viewing.findById(id);
+
+        if (viewing) {
+            await booking.save();
+            viewing.bookings.push(booking);
+            await viewing.save();
+
+            res.status(200).json(viewing);
+            return;
+        }
+        next(new NotFound(id));
+    }
 }

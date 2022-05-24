@@ -7,5 +7,6 @@ router.get('/', viewingController.getAll);
 router.get('/:id', viewingController.getById);
 router.put('/:id', viewingController.update);
 router.delete('/:id', viewingController.delete);
+router.put('/:id/booking', viewingController.addBooking);
 
 module.exports = router;
