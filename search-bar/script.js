@@ -4,8 +4,8 @@ const searchInput = document.querySelector("[data-search]")
 
 let movies = []
 
-searchInput.addEventListener("input", e => {
-    const value = e.target.value.toLowerCase()
+searchInput.addEventListener("input", i => {
+    const value = i.target.value.toLowerCase()
     movies.forEach(movie => {
         const isVisible = movie.name.toLowerCase().includes(value) || movie.genre.toLowerCase().includes(value)
         movie.element.classList.toggle("hide", !isVisible)
