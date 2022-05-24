@@ -1,3 +1,7 @@
+body {
+    background-color: #405889
+}
+
 .search-wrapper {
     display: flex;
     justify-content: center;
