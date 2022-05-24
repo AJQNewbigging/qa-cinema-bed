@@ -5,14 +5,14 @@ const Booking = require('../model/booking.js');
 module.exports = {
 
     getAll: async (req, res, next) => {
-        const viewings = await Viewing.find({}).populate(['movie', 'bookings']);
+        const viewings = await Viewing.find({}).populate(['bookings']);
 
         res.status(200).json(viewings);
     },
 
     getById: async (req, res, next) => {
         const id = req.params.id;
-        const viewing = await Viewing.findById(id).populate(['movie', 'bookings']);
+        const viewing = await Viewing.findById(id).populate(['bookings']);
         if (viewing) {
             res.status(200).json(viewing);
             return;
