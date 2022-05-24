@@ -19,20 +19,6 @@ module.exports = {
         next(new NotFound(id));
     },
 
-    create: async (req, res, next) => {
-        const viewing = new Viewing(req.body);
-
-        // if (viewing.timeAndDate) {
-        //     viewing.timeAndDate = moment.utc(viewing.timeAndDate);
-        // }
-        try {
-            await viewing.save();
-            res.status(200).json(viewing);
-        } catch (error) {
-            next(error);
-        }
-    },
-
     update: async (req, res, next) => {
         const id = req.params.id;
         const updatedViewing = req.body;

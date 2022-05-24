@@ -20,17 +20,16 @@ const viewingSchema = new Schema({
             type: String
         }
     ],
-    movie: {
-        type: Schema.Types.ObjectId,
-        ref: 'Movie',
-        required: true
-    },
     bookings: [
         {
             type: Schema.Types.ObjectId,
             ref: 'Booking'
         }
-    ]
+    ],
+    pricePerTicket: {
+        type: mongoose.Decimal128,
+        required: true
+    }
 })
 
 const Viewing = mongoose.model('Viewing', viewingSchema);
