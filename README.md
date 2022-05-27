@@ -52,6 +52,8 @@ npm run prod
 
 **POST /movie/\<movie_id\>/add-poster** => Allows the uploading of a movie image with a selected movie. Takes a body including `img` = actual image, and `name` = image name.
 
+Example images can be found in the images folder.
+
 **POST /movie/\<movie_id\>/add-viewing** => Allows the creation of a viewing for a film. An example body is shown below.
 
 ```json
