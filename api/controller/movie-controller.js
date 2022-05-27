@@ -20,18 +20,23 @@ module.exports = {
     },
     
     getMovieById: async (req, res, next) => {
-        const id = req.params.id;
-        var movie = {};
-        if (req.query.poster && req.query.poster === "true") {
-            movie = await Movie.findById(id).populate(['poster', 'viewings']);
-        } else {
-            movie = await Movie.findById(id).populate(['viewings']);
+        try {
+            const id = req.params.id;
+            var movie = {};
+            if (req.query.poster && req.query.poster === "true") {
+                movie = await Movie.findById(id).populate(['poster', 'viewings']);
+            } else {
+                movie = await Movie.findById(id).populate(['viewings']);
+            }
+            if (movie) {
+                res.status(200).json(movie);
+                return;
+            }
+
+            next(new MovieNotFoundError(id));
+        } catch (error) {
+            next(error);
         }
-        if (movie) {
-            res.status(200).json(movie);
-            return;
-        }
-        next(new MovieNotFoundError(id));
     },
 
     createMovie: async (req, res, next) => {
