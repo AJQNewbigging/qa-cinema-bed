@@ -13,6 +13,7 @@ const DB_URI = process.env.DB_URI || "mongodb://127.0.0.1:27017/qa-cinema"
 const viewingRouter = require('./route/viewing-router.js')
 const movieRouter = require('./route/movie-router.js')
 const bookingRouter = require('./route/booking-router.js')
+const emailRouter = require('./route/email-router.js');
 
 // Create server instance
 const app = express();
@@ -35,6 +36,7 @@ app.use(cors());
 app.use("/viewing", viewingRouter);
 app.use("/movie", movieRouter);
 app.use("/booking", bookingRouter);
+app.use("/email", emailRouter);
 
 app.use((error, request, response, next) => {
     console.error(error.message);

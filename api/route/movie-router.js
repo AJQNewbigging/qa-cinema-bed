@@ -11,5 +11,8 @@ router.post('/', movieController.createMovie);
 router.put('/:id', movieController.updateMovie);
 router.delete('/:id', movieController.deleteMovie);
 router.post('/:id/add-poster', upload.single('img'), movieController.addPoster);
+router.get('/find/whats-on', movieController.findWhatsOn);
+router.get('/find/new-releases', movieController.findNewReleases);
+router.post('/:id/add-viewing', movieController.addViewing);
 
 module.exports = router;

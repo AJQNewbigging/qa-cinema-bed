@@ -17,12 +17,21 @@ const movieSchema = new Schema({
         unique: false,
         required: true
     },
-    director: {
-        type: String,
-        unqiue: false,
-        required: true
-    },
-    yearOfRelease: {
+    directors: [
+        {
+            type: String,
+            required: true,
+            unique: false
+        }
+    ],
+    actors: [
+        {
+            type: String,
+            required: true,
+            unique: false
+        }
+    ],
+    releaseDate: {
         type: Date,
         unique: false,
         required: true
@@ -41,7 +50,14 @@ const movieSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Image',
         required: false
-    }
+    },
+    viewings: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Viewing',
+            required: false
+        }
+    ]
 });
 
 const Movie = mongoose.model('Movie', movieSchema);
